@@ -195,5 +195,5 @@ jobs:
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
       with:
-        snap: ${{needs.build-snap.outputs.snap-file}}
-        release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge'}}
+        snap: ${{ steps.build-snap.outputs.snap }}
+        release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge' }}
