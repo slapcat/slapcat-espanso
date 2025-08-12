@@ -183,7 +183,7 @@ jobs:
     - uses: snapcore/action-build@v1
       id: build-snap
     - run: |
-        sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
+        sudo snap install --classic --dangerous ${{ steps.build-snap.outputs.snap }}
     - run: |
         slapcat-espanso.espanso path
     - uses: actions/upload-artifact@v4
