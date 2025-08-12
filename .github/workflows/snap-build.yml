@@ -19,15 +19,13 @@ jobs:
     - uses: actions/checkout@v4
     - uses: snapcore/action-build@v1
       id: build-snap
-      with:
-        path: './snap'
     - run: |
         sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
     - run: |
-        espanso path
+        slapcat-espanso.espanso path
     - uses: actions/upload-artifact@v4
       with:
-        name: espanso
+        name: slapcat-espanso
         path: ${{ steps.build-snap.outputs.snap }}
 
   publish:
@@ -37,7 +35,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: espanso
+        name: slapcat-espanso
         path: .
     - uses: snapcore/action-publish@v1
       env:
