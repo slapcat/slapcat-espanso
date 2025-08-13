@@ -51,7 +51,7 @@ parts:
     source: .
     rust-no-default-features: true
     rust-features:
-      #      - wayland
+#      - wayland
       - modulo
       - vendored-tls
     build-attributes:
