@@ -184,12 +184,14 @@ jobs:
     - uses: actions/checkout@v4
     - uses: snapcore/action-build@v1
       id: build-snap
-      snapcraft-args: "-o x11"
+      with:
+        snapcraft-args: "-o x11"
     - run: |
         sed -e 's/^#//' snapcraft.yaml
     - uses: snapcore/action-build@v1
       id: build-snap
-      snapcraft-args: "-o wayland"
+      with:
+        snapcraft-args: "-o wayland"
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
