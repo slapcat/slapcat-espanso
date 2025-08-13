@@ -183,24 +183,24 @@ jobs:
         mkdir -p x11 wayland
     - uses: actions/checkout@v4
     - uses: snapcore/action-build@v1
-      id: build-snap
+      id: build-x11
       with:
         snapcraft-args: "-o x11"
     - run: |
         sed -e 's/^#//' snapcraft.yaml
     - uses: snapcore/action-build@v1
-      id: build-snap
+      id: build-wayland
       with:
         snapcraft-args: "-o wayland"
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
       with:
-        snap: "x11/${{ steps.build-snap.outputs.snap }}"
+        snap: "x11/${{ steps.build-x11.outputs.snap }}"
         release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge' }}
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
       with:
-        snap: "wayland/${{ steps.build-snap.outputs.snap }}"
+        snap: "wayland/${{ steps.build-wayland.outputs.snap }}"
         release: ${{ startsWith(github.ref, 'refs/tags/') && 'wayland-candidate' || 'wayland-edge' }}
